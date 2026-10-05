@@ -7,7 +7,7 @@ import { requestKimi } from "./kimi-client.js";
 export function createServer(config: Config) {
 	const server = new McpServer({
 		name: "kimi-search-mcp",
-		version: "0.1.0"
+		version: "1.0.0"
 	});
 
 	server.registerTool(
