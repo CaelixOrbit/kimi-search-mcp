@@ -10,59 +10,103 @@ An unofficial local MCP server for Kimi web search, using an Open Platform API k
 - npm
 - A Moonshot Open Platform API key
 
-## Quick Start
+## Installation and Startup
 
-Starting with npx is recommended. You do not need to download the source code or compile it yourself.
+Global npm installation is recommended for regular use. It has low startup overhead and requires no source build. npx is easy to configure and suitable for a quick trial, but has higher startup overhead. Build from source when you need to modify the code.
 
-The following example uses Kimi Code Desktop. Merge the configuration into the user-level `~/.kimi-code/mcp.json` and replace the API key placeholder.
+The following examples use Kimi Code Desktop. Merge the configuration into the user-level `~/.kimi-code/mcp.json` and replace the API key placeholder.
 
-```json
-{
-  "mcpServers": {
-    "kimi-search": {
-      "command": "npx",
-      "args": ["-y", "kimi-search-mcp@1.0.0"],
-      "env": {
-        "MOONSHOT_API_KEY": "YOUR_MOONSHOT_API_KEY",
-        "KIMI_ENABLE_WEB_FETCH": "false"
-      },
-      "toolTimeoutMs": 80000
-    }
-  }
-}
-```
+After saving the configuration, if the tools do not appear in the MCP list or the changes have not taken effect, try restarting the client.
 
-After saving, create a new session for the configuration to take effect. The first launch requires an internet connection to download the package.
-
-## Installation
-
-### Global npm Installation
+### Global npm Installation (Recommended)
 
 ```shell
-npm install -g kimi-search-mcp@1.0.0
+npm install -g kimi-search-mcp@latest
 ```
 
-After installation, merge the configuration below into the client's MCP configuration and replace the API key placeholder:
+After installation, use the following launch configuration:
 
-```json
-{
-  "mcpServers": {
-    "kimi-search": {
-      "command": "kimi-search-mcp",
-      "args": [],
-      "env": {
-        "MOONSHOT_API_KEY": "YOUR_MOONSHOT_API_KEY",
-        "KIMI_ENABLE_WEB_FETCH": "false"
-      },
-      "toolTimeoutMs": 80000
+- Windows:
+
+  ```json
+  {
+    "mcpServers": {
+      "kimi-search": {
+        "command": "cmd",
+        "args": ["/c", "kimi-search-mcp"],
+        "env": {
+          "MOONSHOT_API_KEY": "YOUR_MOONSHOT_API_KEY",
+          "KIMI_ENABLE_WEB_FETCH": "false"
+        },
+        "toolTimeoutMs": 80000
+      }
     }
   }
-}
-```
+  ```
+
+- macOS / Linux:
+
+  ```json
+  {
+    "mcpServers": {
+      "kimi-search": {
+        "command": "kimi-search-mcp",
+        "args": [],
+        "env": {
+          "MOONSHOT_API_KEY": "YOUR_MOONSHOT_API_KEY",
+          "KIMI_ENABLE_WEB_FETCH": "false"
+        },
+        "toolTimeoutMs": 80000
+      }
+    }
+  }
+  ```
+
+### Quick Trial with npx
+
+npx requires no global installation or source build, but has higher startup overhead than a global installation.
+
+- Windows:
+
+  ```json
+  {
+    "mcpServers": {
+      "kimi-search": {
+        "command": "cmd",
+        "args": ["/c", "npx", "-y", "kimi-search-mcp@latest"],
+        "env": {
+          "MOONSHOT_API_KEY": "YOUR_MOONSHOT_API_KEY",
+          "KIMI_ENABLE_WEB_FETCH": "false"
+        },
+        "toolTimeoutMs": 80000
+      }
+    }
+  }
+  ```
+
+- macOS / Linux:
+
+  ```json
+  {
+    "mcpServers": {
+      "kimi-search": {
+        "command": "npx",
+        "args": ["-y", "kimi-search-mcp@latest"],
+        "env": {
+          "MOONSHOT_API_KEY": "YOUR_MOONSHOT_API_KEY",
+          "KIMI_ENABLE_WEB_FETCH": "false"
+        },
+        "toolTimeoutMs": 80000
+      }
+    }
+  }
+  ```
+
+The first launch requires an internet connection to download the package.
 
 ### Build From Source
 
-Download the source code and run the following commands in the project root:
+Download the source code from the [GitHub repository](https://github.com/CaelixOrbit/kimi-search-mcp) and run the following commands in the project root:
 
 ```shell
 npm ci
@@ -75,7 +119,7 @@ Build output is generated in `dist`. Merge the configuration below into the clie
 {
   "mcpServers": {
     "kimi-search": {
-      "command": "C:/path/to/node.exe",
+      "command": "node",
       "args": ["C:/path/to/kimi-search-mcp/dist/index.js"],
       "env": {
         "MOONSHOT_API_KEY": "YOUR_MOONSHOT_API_KEY",
@@ -105,8 +149,6 @@ See the official [Web Search Best Practices](https://platform.kimi.com/docs/guid
 | `KIMI_ENABLE_WEB_FETCH` | Controls whether the `kimi_web_fetch` tool is enabled; disabled by default |
 
 Since many agent applications already provide free web-fetch (web_fetch) functionality, the paid `kimi_web_fetch` tool is disabled by default and does not appear in the client's tool list. Set `KIMI_ENABLE_WEB_FETCH` to `"true"` to enable it if needed.
-
-Restart the MCP server after changing environment variables. In Kimi Code Desktop, create a new session to load the updated configuration.
 
 ## Billing
 

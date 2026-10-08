@@ -10,59 +10,103 @@
 - npm
 - Moonshot 开放平台 API Key
 
-## 快速开始
+## 安装与启动
 
-推荐通过 npx 启动，无需下载源码或自行编译。
+推荐使用 npm 全局安装，适合日常使用，启动开销较低且无需自行构建。npx 配置方便，适合快速试用，但启动开销较高；源码构建适合需要修改代码的用户。
 
 以下以 Kimi Code 桌面版为例：将配置合并到用户级 `~/.kimi-code/mcp.json`，替换 API Key 占位符。
 
-```json
-{
-  "mcpServers": {
-    "kimi-search": {
-      "command": "npx",
-      "args": ["-y", "kimi-search-mcp@1.0.0"],
-      "env": {
-        "MOONSHOT_API_KEY": "YOUR_MOONSHOT_API_KEY",
-        "KIMI_ENABLE_WEB_FETCH": "false"
-      },
-      "toolTimeoutMs": 80000
-    }
-  }
-}
-```
+保存配置后，如工具未出现在 MCP 列表中，或配置变更未生效，可尝试重启客户端。
 
-保存后新建会话生效，首次启动需要联网下载包。
-
-## 安装
-
-### npm 全局安装
+### npm 全局安装（推荐）
 
 ```shell
-npm install -g kimi-search-mcp@1.0.0
+npm install -g kimi-search-mcp@latest
 ```
 
-安装后，将下方配置合并到客户端的 MCP 配置中，替换 API Key 占位符：
+安装完成后，使用以下启动配置：
 
-```json
-{
-  "mcpServers": {
-    "kimi-search": {
-      "command": "kimi-search-mcp",
-      "args": [],
-      "env": {
-        "MOONSHOT_API_KEY": "YOUR_MOONSHOT_API_KEY",
-        "KIMI_ENABLE_WEB_FETCH": "false"
-      },
-      "toolTimeoutMs": 80000
+- Windows：
+
+  ```json
+  {
+    "mcpServers": {
+      "kimi-search": {
+        "command": "cmd",
+        "args": ["/c", "kimi-search-mcp"],
+        "env": {
+          "MOONSHOT_API_KEY": "YOUR_MOONSHOT_API_KEY",
+          "KIMI_ENABLE_WEB_FETCH": "false"
+        },
+        "toolTimeoutMs": 80000
+      }
     }
   }
-}
-```
+  ```
+
+- macOS / Linux：
+
+  ```json
+  {
+    "mcpServers": {
+      "kimi-search": {
+        "command": "kimi-search-mcp",
+        "args": [],
+        "env": {
+          "MOONSHOT_API_KEY": "YOUR_MOONSHOT_API_KEY",
+          "KIMI_ENABLE_WEB_FETCH": "false"
+        },
+        "toolTimeoutMs": 80000
+      }
+    }
+  }
+  ```
+
+### npx 快速试用
+
+无需全局安装或自行编译，配置方便，但启动开销高于全局安装。
+
+- Windows：
+  
+  ```json
+  {
+    "mcpServers": {
+      "kimi-search": {
+        "command": "cmd",
+        "args": ["/c", "npx", "-y", "kimi-search-mcp@latest"],
+        "env": {
+          "MOONSHOT_API_KEY": "YOUR_MOONSHOT_API_KEY",
+          "KIMI_ENABLE_WEB_FETCH": "false"
+        },
+        "toolTimeoutMs": 80000
+      }
+    }
+  }
+  ```
+
+- macOS / Linux：
+
+  ```json
+  {
+    "mcpServers": {
+      "kimi-search": {
+        "command": "npx",
+        "args": ["-y", "kimi-search-mcp@latest"],
+        "env": {
+          "MOONSHOT_API_KEY": "YOUR_MOONSHOT_API_KEY",
+          "KIMI_ENABLE_WEB_FETCH": "false"
+        },
+        "toolTimeoutMs": 80000
+      }
+    }
+  }
+  ```
+
+首次启动需要联网下载包。
 
 ### 从源码构建
 
-下载源码，在项目根目录执行：
+从 [GitHub 仓库](https://github.com/CaelixOrbit/kimi-search-mcp) 下载源码，在项目根目录执行：
 
 ```shell
 npm ci
@@ -75,7 +119,7 @@ npm run build
 {
   "mcpServers": {
     "kimi-search": {
-      "command": "C:/path/to/node.exe",
+      "command": "node",
       "args": ["C:/path/to/kimi-search-mcp/dist/index.js"],
       "env": {
         "MOONSHOT_API_KEY": "YOUR_MOONSHOT_API_KEY",
@@ -105,8 +149,6 @@ npm run build
 | `KIMI_ENABLE_WEB_FETCH` | 控制是否启用 `kimi_web_fetch` 工具，默认关闭 |
 
 考虑到不少 Agent 软件已经自带免费的网页抓取（web_fetch）功能，需要付费使用的 `kimi_web_fetch` 工具默认关闭，也不会出现在客户端的工具列表中。需要时，可将 `KIMI_ENABLE_WEB_FETCH` 设置为 `"true"` 来开启。
-
-修改环境变量后需要重启 MCP 实例；Kimi Code 桌面版请新建会话加载更新后的配置。
 
 ## 费用
 
