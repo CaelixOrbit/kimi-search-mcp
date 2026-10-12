@@ -1,9 +1,10 @@
 export async function requestKimi(
   apiKey: string,
+  baseUrl: string,
   path: string,
   body: object
 ): Promise<Record<string, unknown>> {
-  const response = await fetch(`https://api.moonshot.cn${path}`, {
+  const response = await fetch(`${baseUrl}${path}`, {
     method: "POST",
     headers: {
       Authorization: `Bearer ${apiKey}`,

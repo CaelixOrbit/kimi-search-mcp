@@ -2,7 +2,7 @@
 
 [English](README.en.md)
 
-非官方的本地 MCP Server，使用开放平台 API Key 调用 Kimi 联网搜索服务。仅支持 stdio。
+非官方的本地 MCP Server，使用开放平台 API Key 调用 Kimi 联网搜索服务，支持国内站和国际站。仅支持 stdio。
 
 ## 环境要求
 
@@ -36,6 +36,7 @@ npm install -g kimi-search-mcp@latest
         "args": ["/c", "kimi-search-mcp"],
         "env": {
           "MOONSHOT_API_KEY": "YOUR_MOONSHOT_API_KEY",
+          "KIMI_REGION": "cn",
           "KIMI_ENABLE_WEB_FETCH": "false"
         },
         "toolTimeoutMs": 80000
@@ -54,6 +55,7 @@ npm install -g kimi-search-mcp@latest
         "args": [],
         "env": {
           "MOONSHOT_API_KEY": "YOUR_MOONSHOT_API_KEY",
+          "KIMI_REGION": "cn",
           "KIMI_ENABLE_WEB_FETCH": "false"
         },
         "toolTimeoutMs": 80000
@@ -76,6 +78,7 @@ npm install -g kimi-search-mcp@latest
         "args": ["/c", "npx", "-y", "kimi-search-mcp@latest"],
         "env": {
           "MOONSHOT_API_KEY": "YOUR_MOONSHOT_API_KEY",
+          "KIMI_REGION": "cn",
           "KIMI_ENABLE_WEB_FETCH": "false"
         },
         "toolTimeoutMs": 80000
@@ -94,6 +97,7 @@ npm install -g kimi-search-mcp@latest
         "args": ["-y", "kimi-search-mcp@latest"],
         "env": {
           "MOONSHOT_API_KEY": "YOUR_MOONSHOT_API_KEY",
+          "KIMI_REGION": "cn",
           "KIMI_ENABLE_WEB_FETCH": "false"
         },
         "toolTimeoutMs": 80000
@@ -123,6 +127,7 @@ npm run build
       "args": ["C:/path/to/kimi-search-mcp/dist/index.js"],
       "env": {
         "MOONSHOT_API_KEY": "YOUR_MOONSHOT_API_KEY",
+        "KIMI_REGION": "cn",
         "KIMI_ENABLE_WEB_FETCH": "false"
       },
       "toolTimeoutMs": 80000
@@ -139,20 +144,29 @@ npm run build
 | `kimi_search_pro`   | [联网搜索 Pro](https://platform.kimi.com/docs/api/tools-search-pro)  |
 | `kimi_web_fetch`    | [网页抓取](https://platform.kimi.com/docs/api/tools-fetch)，默认关闭 |
 
-接口区别、参数和使用建议见官方[联网搜索最佳实践](https://platform.kimi.com/docs/guide/best-practices-for-web-search)。
+接口区别、参数和使用建议见官方文档：[国内站联网搜索最佳实践](https://platform.kimi.com/docs/guide/best-practices-for-web-search)、[国际站联网搜索最佳实践](https://platform.kimi.ai/docs/guide/best-practices-for-web-search)。
 
 ## 环境变量
 
 | 变量                    | 规则                                         |
 | ----------------------- | -------------------------------------------- |
-| `MOONSHOT_API_KEY`      | 必填，使用开放平台 API Key                   |
+| `MOONSHOT_API_KEY`      | 必填，使用所选站点创建的开放平台 API Key     |
+| `KIMI_REGION`           | `cn`（默认）为国内站，`global` 为国际站     |
 | `KIMI_ENABLE_WEB_FETCH` | 控制是否启用 `kimi_web_fetch` 工具，默认关闭 |
+
+站点在启动时选择，三个工具统一使用所选站点。未设置 `KIMI_REGION` 时默认使用国内站，国际站用户需要显式设置为 `global`。
+
+> [!note]
+> 
+> **注意：** 国内站与国际站的 API Key 相互独立，不能混用。切换 `KIMI_REGION` 时，请同时将 `MOONSHOT_API_KEY` 替换为对应站点创建的 Key。[官方 API Key 区域说明](https://platform.kimi.com/docs/guide/troubleshooting)
+> 
+> API Key 创建入口：[国内站 API Key 管理页面](https://platform.kimi.com/console/api-keys)、[国际站 API Key 管理页面](https://platform.kimi.ai/console/api-keys)。
 
 考虑到不少 Agent 软件已经自带免费的网页抓取（web_fetch）功能，需要付费使用的 `kimi_web_fetch` 工具默认关闭，也不会出现在客户端的工具列表中。需要时，可将 `KIMI_ENABLE_WEB_FETCH` 设置为 `"true"` 来开启。
 
 ## 费用
 
-调用使用开放平台账户额度，具体价格和计费规则以官方[联网搜索与网页抓取定价](https://platform.kimi.com/docs/pricing/websearch)为准。
+调用使用所选站点的开放平台账户额度。具体价格和计费规则见[国内站联网搜索与网页抓取定价](https://platform.kimi.com/docs/pricing/websearch)、[国际站联网搜索与网页抓取定价](https://platform.kimi.ai/docs/pricing/websearch)。
 
 ## 许可证
 

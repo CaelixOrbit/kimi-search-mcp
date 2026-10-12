@@ -2,7 +2,7 @@
 
 [中文](README.md)
 
-An unofficial local MCP server for Kimi web search, using an Open Platform API key. Supports stdio only.
+An unofficial local MCP server for Kimi web search, using an Open Platform API key. Supports the China and international platforms. Supports stdio only.
 
 ## Requirements
 
@@ -36,6 +36,7 @@ After installation, use the following launch configuration:
         "args": ["/c", "kimi-search-mcp"],
         "env": {
           "MOONSHOT_API_KEY": "YOUR_MOONSHOT_API_KEY",
+          "KIMI_REGION": "cn",
           "KIMI_ENABLE_WEB_FETCH": "false"
         },
         "toolTimeoutMs": 80000
@@ -54,6 +55,7 @@ After installation, use the following launch configuration:
         "args": [],
         "env": {
           "MOONSHOT_API_KEY": "YOUR_MOONSHOT_API_KEY",
+          "KIMI_REGION": "cn",
           "KIMI_ENABLE_WEB_FETCH": "false"
         },
         "toolTimeoutMs": 80000
@@ -76,6 +78,7 @@ npx requires no global installation or source build, but has higher startup over
         "args": ["/c", "npx", "-y", "kimi-search-mcp@latest"],
         "env": {
           "MOONSHOT_API_KEY": "YOUR_MOONSHOT_API_KEY",
+          "KIMI_REGION": "cn",
           "KIMI_ENABLE_WEB_FETCH": "false"
         },
         "toolTimeoutMs": 80000
@@ -94,6 +97,7 @@ npx requires no global installation or source build, but has higher startup over
         "args": ["-y", "kimi-search-mcp@latest"],
         "env": {
           "MOONSHOT_API_KEY": "YOUR_MOONSHOT_API_KEY",
+          "KIMI_REGION": "cn",
           "KIMI_ENABLE_WEB_FETCH": "false"
         },
         "toolTimeoutMs": 80000
@@ -123,6 +127,7 @@ Build output is generated in `dist`. Merge the configuration below into the clie
       "args": ["C:/path/to/kimi-search-mcp/dist/index.js"],
       "env": {
         "MOONSHOT_API_KEY": "YOUR_MOONSHOT_API_KEY",
+        "KIMI_REGION": "cn",
         "KIMI_ENABLE_WEB_FETCH": "false"
       },
       "toolTimeoutMs": 80000
@@ -139,20 +144,27 @@ Build output is generated in `dist`. Merge the configuration below into the clie
 | `kimi_search_pro` | [Web Search Pro](https://platform.kimi.com/docs/api/tools-search-pro) |
 | `kimi_web_fetch` | [Web Fetch](https://platform.kimi.com/docs/api/tools-fetch), disabled by default |
 
-See the official [Web Search Best Practices](https://platform.kimi.com/docs/guide/best-practices-for-web-search) for interface differences, parameters, and usage recommendations.
+For interface differences, parameters, and usage recommendations, see [China Web Search Best Practices](https://platform.kimi.com/docs/guide/best-practices-for-web-search) and [International Web Search Best Practices](https://platform.kimi.ai/docs/guide/best-practices-for-web-search).
 
 ## Environment Variables
 
 | Variable | Rule |
 | --- | --- |
-| `MOONSHOT_API_KEY` | Required; use an Open Platform API key |
+| `MOONSHOT_API_KEY` | Required; use an Open Platform API key created on the selected platform |
+| `KIMI_REGION` | `cn` (default) for China; `global` for the international platform |
 | `KIMI_ENABLE_WEB_FETCH` | Controls whether the `kimi_web_fetch` tool is enabled; disabled by default |
+
+The platform is selected at startup and applies to all three tools. If `KIMI_REGION` is unset, the China platform is used, so existing users do not need to change their configuration. Only international users need to explicitly set it to `global`.
+
+> **Note:** API keys for the China and international platforms are independent and cannot be mixed. When changing `KIMI_REGION`, also replace `MOONSHOT_API_KEY` with a key created on the corresponding platform. See the [API Key Region Troubleshooting](https://platform.kimi.ai/docs/guide/troubleshooting).
+> 
+> Create an API key: [China API Key Management](https://platform.kimi.com/console/api-keys), [International API Key Management](https://platform.kimi.ai/console/api-keys).
 
 Since many agent applications already provide free web-fetch (web_fetch) functionality, the paid `kimi_web_fetch` tool is disabled by default and does not appear in the client's tool list. Set `KIMI_ENABLE_WEB_FETCH` to `"true"` to enable it if needed.
 
 ## Billing
 
-Calls use your Open Platform account credits. For current prices and billing rules, see the official [Web Search and Web Fetch Pricing](https://platform.kimi.com/docs/pricing/websearch).
+Calls use your Open Platform account credits on the selected platform. For current prices and billing rules, see [China Web Search and Web Fetch Pricing](https://platform.kimi.com/docs/pricing/websearch) and [International Web Search and Web Fetch Pricing](https://platform.kimi.ai/docs/pricing/websearch).
 
 ## License
 

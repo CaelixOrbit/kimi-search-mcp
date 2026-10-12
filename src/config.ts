@@ -1,5 +1,6 @@
 export interface Config {
   apiKey: string;
+  baseUrl: string;
   enableWebFetch: boolean;
 }
 
@@ -12,6 +13,9 @@ export function readConfig(): Config {
 
   return {
     apiKey,
+    baseUrl: process.env.KIMI_REGION === "global"
+      ? "https://api.moonshot.ai"
+      : "https://api.moonshot.cn",
     enableWebFetch: process.env.KIMI_ENABLE_WEB_FETCH === "true"
   };
 }
