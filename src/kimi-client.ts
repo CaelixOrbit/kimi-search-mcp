@@ -16,7 +16,20 @@ export async function requestKimi(
   });
 
   if (!response.ok) {
-    throw new Error(`Kimi API HTTP ${response.status}`);
+    const details = [`Kimi API HTTP ${response.status}`];
+    const error = (await response.json().catch(() => null))?.error;
+
+    for (const field of ["message", "type", "code"]) {
+      const value = error?.[field];
+      if (value != null) details.push(`${field}: ${value}`);
+    }
+
+    for (const name of ["X-Msh-Track-Id", "X-Msh-Chat-Id"]) {
+      const value = response.headers.get(name);
+      if (value) details.push(`${name}: ${value}`);
+    }
+
+    throw new Error(details.join("\n"));
   }
 
   return await response.json();
