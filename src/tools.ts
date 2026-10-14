@@ -1,13 +1,19 @@
+import { readFileSync } from "node:fs";
+
 import { McpServer } from "@modelcontextprotocol/server";
 import * as z from "zod/v4";
 
 import type { Config } from "./config.js";
 import { requestKimi } from "./kimi-client.js";
 
+const { name, version }: { name: string; version: string } = JSON.parse(
+	readFileSync(new URL("../package.json", import.meta.url), "utf8")
+);
+
 export function createServer(config: Config) {
 	const server = new McpServer({
-		name: "kimi-search-mcp",
-		version: "1.1.0"
+		name,
+		version
 	});
 
 	server.registerTool(
