@@ -151,7 +151,7 @@ npm run build
 | 变量                    | 规则                                         |
 | ----------------------- | -------------------------------------------- |
 | `MOONSHOT_API_KEY`      | 必填，使用所选站点创建的开放平台 API Key     |
-| `KIMI_REGION`           | `cn`（默认）为国内站，`global` 为国际站     |
+| `KIMI_REGION`           | `cn`（默认）为国内站，`global` 为国际站      |
 | `KIMI_ENABLE_WEB_FETCH` | 控制是否启用 `kimi_web_fetch` 工具，默认关闭 |
 
 站点在启动时选择，三个工具统一使用所选站点。未设置 `KIMI_REGION` 时默认使用国内站，国际站用户需要显式设置为 `global`。

@@ -138,20 +138,20 @@ Build output is generated in `dist`. Merge the configuration below into the clie
 
 ## Tools
 
-| MCP Tool | Corresponding API |
-| --- | --- |
-| `kimi_search_basic` | [Web Search Basic](https://platform.kimi.com/docs/api/tools-search) |
-| `kimi_search_pro` | [Web Search Pro](https://platform.kimi.com/docs/api/tools-search-pro) |
-| `kimi_web_fetch` | [Web Fetch](https://platform.kimi.com/docs/api/tools-fetch), disabled by default |
+| MCP Tool            | Corresponding API                                                                |
+| ------------------- | -------------------------------------------------------------------------------- |
+| `kimi_search_basic` | [Web Search Basic](https://platform.kimi.com/docs/api/tools-search)              |
+| `kimi_search_pro`   | [Web Search Pro](https://platform.kimi.com/docs/api/tools-search-pro)            |
+| `kimi_web_fetch`    | [Web Fetch](https://platform.kimi.com/docs/api/tools-fetch), disabled by default |
 
 For interface differences, parameters, and usage recommendations, see [China Web Search Best Practices](https://platform.kimi.com/docs/guide/best-practices-for-web-search) and [International Web Search Best Practices](https://platform.kimi.ai/docs/guide/best-practices-for-web-search).
 
 ## Environment Variables
 
-| Variable | Rule |
-| --- | --- |
-| `MOONSHOT_API_KEY` | Required; use an Open Platform API key created on the selected platform |
-| `KIMI_REGION` | `cn` (default) for China; `global` for the international platform |
+| Variable                | Rule                                                                       |
+| ----------------------- | -------------------------------------------------------------------------- |
+| `MOONSHOT_API_KEY`      | Required; use an Open Platform API key created on the selected platform    |
+| `KIMI_REGION`           | `cn` (default) for China; `global` for the international platform          |
 | `KIMI_ENABLE_WEB_FETCH` | Controls whether the `kimi_web_fetch` tool is enabled; disabled by default |
 
 The platform is selected at startup and applies to all three tools. If `KIMI_REGION` is unset, the China platform is used, so existing users do not need to change their configuration. Only international users need to explicitly set it to `global`.
