@@ -13,7 +13,16 @@
   "engines": {
     "node": ">=22"
   },
-  "keywords": [],
+  "keywords": [
+    "kimi",
+    "moonshot",
+    "mcp",
+    "mcp-server",
+    "model-context-protocol",
+    "web-search",
+    "search",
+    "web-fetch"
+  ],
   "files": [
     "dist",
     "README.md",
