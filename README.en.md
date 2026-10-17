@@ -2,13 +2,13 @@
 
 [中文](README.md)
 
-An unofficial local MCP server for Kimi web search, using an Open Platform API key. Supports the China and international platforms. Supports stdio only.
+An unofficial local MCP server that calls Kimi's web search and web fetch APIs with a Kimi API key. Supports the China and international platforms. Supports stdio only.
 
 ## Requirements
 
 - Node.js 22 or later
 - npm
-- A Moonshot Open Platform API key
+- A Moonshot API key
 
 ## Installation and Startup
 
@@ -16,7 +16,7 @@ Global npm installation is recommended for regular use. It has low startup overh
 
 The following examples use Kimi Code Desktop. Merge the configuration into the user-level `~/.kimi-code/mcp.json` and replace the API key placeholder.
 
-After saving the configuration, if the tools do not appear in the MCP list or the changes have not taken effect, try restarting the client.
+After saving the configuration, if the changes have not taken effect and the tools do not appear in the MCP list, try restarting the client.
 
 ### Global npm Installation (Recommended)
 
@@ -117,7 +117,7 @@ npm ci
 npm run build
 ```
 
-Build output is generated in `dist`. Merge the configuration below into the client's MCP configuration and replace the API key placeholder. The following example is for Windows; replace the paths with the actual absolute paths:
+Build output is generated in `dist`. Merge the configuration below into the client's MCP configuration, then replace the API key placeholder and set the path in `args` to the actual absolute path of `dist/index.js`:
 
 ```json
 {
@@ -156,15 +156,17 @@ For interface differences, parameters, and usage recommendations, see [China Web
 
 The platform is selected at startup and applies to all three tools. If `KIMI_REGION` is unset, the China platform is used, so existing users do not need to change their configuration. Only international users need to explicitly set it to `global`.
 
+> [!note]
+> 
 > **Note:** API keys for the China and international platforms are independent and cannot be mixed. When changing `KIMI_REGION`, also replace `MOONSHOT_API_KEY` with a key created on the corresponding platform. See the [API Key Region Troubleshooting](https://platform.kimi.ai/docs/guide/troubleshooting).
 > 
 > Create an API key: [China API Key Management](https://platform.kimi.com/console/api-keys), [International API Key Management](https://platform.kimi.ai/console/api-keys).
 
-Since many agent applications already provide free web-fetch (web_fetch) functionality, the paid `kimi_web_fetch` tool is disabled by default and does not appear in the client's tool list. Set `KIMI_ENABLE_WEB_FETCH` to `"true"` to enable it if needed.
+Since many agent clients already provide free web-fetch (web_fetch) functionality, the paid `kimi_web_fetch` tool is disabled by default and does not appear in the client's tool list. Set `KIMI_ENABLE_WEB_FETCH` to `"true"` to enable it if needed.
 
 ## Billing
 
-Calls use your Open Platform account credits on the selected platform. For current prices and billing rules, see [China Web Search and Web Fetch Pricing](https://platform.kimi.com/docs/pricing/websearch) and [International Web Search and Web Fetch Pricing](https://platform.kimi.ai/docs/pricing/websearch).
+Calls use your Kimi Platform account credits on the selected platform. For current prices and billing rules, see [China Web Search and Web Fetch Pricing](https://platform.kimi.com/docs/pricing/websearch) and [International Web Search and Web Fetch Pricing](https://platform.kimi.ai/docs/pricing/websearch).
 
 ## License
 

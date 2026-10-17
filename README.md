@@ -2,7 +2,7 @@
 
 [English](README.en.md)
 
-非官方的本地 MCP Server，使用开放平台 API Key 调用 Kimi 联网搜索服务，支持国内站和国际站。仅支持 stdio。
+非官方的本地 MCP Server，使用 Kimi 开放平台 API Key 调用联网搜索和网页抓取接口，支持国内站和国际站。仅支持 stdio。
 
 ## 环境要求
 
@@ -14,9 +14,9 @@
 
 推荐使用 npm 全局安装，适合日常使用，启动开销较低且无需自行构建。npx 配置方便，适合快速试用，但启动开销较高；源码构建适合需要修改代码的用户。
 
-以下以 Kimi Code 桌面版为例：将配置合并到用户级 `~/.kimi-code/mcp.json`，替换 API Key 占位符。
+以下以 Kimi Code 桌面版为例，将配置合并到用户级 `~/.kimi-code/mcp.json`，替换 API Key 占位符。
 
-保存配置后，如工具未出现在 MCP 列表中，或配置变更未生效，可尝试重启客户端。
+保存配置后，若配置变更未生效，工具未出现在 MCP 列表中，可尝试重启客户端。
 
 ### npm 全局安装（推荐）
 
@@ -117,7 +117,7 @@ npm ci
 npm run build
 ```
 
-构建产物位于 `dist`。将下方配置合并到客户端的 MCP 配置中，替换 API Key 占位符。下面以 Windows 为例，请填写实际绝对路径：
+构建产物位于 `dist`。将下方配置合并到客户端的 MCP 配置中，替换 API Key 占位符，并将 `args` 中的路径改为 `dist/index.js` 的实际绝对路径：
 
 ```json
 {
@@ -148,11 +148,11 @@ npm run build
 
 ## 环境变量
 
-| 变量                    | 规则                                         |
-| ----------------------- | -------------------------------------------- |
-| `MOONSHOT_API_KEY`      | 必填，使用所选站点创建的开放平台 API Key     |
-| `KIMI_REGION`           | `cn`（默认）为国内站，`global` 为国际站      |
-| `KIMI_ENABLE_WEB_FETCH` | 控制是否启用 `kimi_web_fetch` 工具，默认关闭 |
+| 变量                    | 规则                                           |
+| ----------------------- | ---------------------------------------------- |
+| `MOONSHOT_API_KEY`      | 必填，使用所选站点创建的 Kimi 开放平台 API Key |
+| `KIMI_REGION`           | `cn`（默认）为国内站，`global` 为国际站        |
+| `KIMI_ENABLE_WEB_FETCH` | 控制是否启用 `kimi_web_fetch` 工具，默认关闭   |
 
 站点在启动时选择，三个工具统一使用所选站点。未设置 `KIMI_REGION` 时默认使用国内站，国际站用户需要显式设置为 `global`。
 
@@ -166,7 +166,7 @@ npm run build
 
 ## 费用
 
-调用使用所选站点的开放平台账户额度。具体价格和计费规则见[国内站联网搜索与网页抓取定价](https://platform.kimi.com/docs/pricing/websearch)、[国际站联网搜索与网页抓取定价](https://platform.kimi.ai/docs/pricing/websearch)。
+调用使用所选站点的 Kimi 开放平台账户额度。具体价格和计费规则见 [国内站联网搜索与网页抓取定价](https://platform.kimi.com/docs/pricing/websearch)、[国际站联网搜索与网页抓取定价](https://platform.kimi.ai/docs/pricing/websearch)。
 
 ## 许可证
 
